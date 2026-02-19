@@ -1,0 +1,16 @@
+name: Player classes
+version: '0.1'
+main: org.hlebushek.playerClasses.PlayerClasses
+api-version: '1.21'
+
+commands:
+  class:
+    description: Управление классами
+    usage: >
+      /class show [player]
+      /class set <player> <class>
+
+permissions:
+  playerClasses.admin:
+    description: Команды администратора
+    default: op

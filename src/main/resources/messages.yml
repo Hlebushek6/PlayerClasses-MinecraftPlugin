@@ -1,0 +1,11 @@
+prefix: "&6[PlayerClasses]"
+default: "&cНе удалось найти сообщения для отображения :("
+
+invalid_syntax: "&cОшибка в использовании команды! Используйте /help для дополнительной информации"
+no_permission: "У вас нет прав на использование этой команды!"
+player_not_found: "Игрок не найден!"
+class_not_found: "Класс не найден!"
+
+class_set: "Игроку %player% установлен класс %class%"
+
+show_class: "Класс игрока %player%: %class%"
