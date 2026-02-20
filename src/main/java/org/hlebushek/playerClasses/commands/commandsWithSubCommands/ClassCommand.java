@@ -1,4 +1,4 @@
-package org.hlebushek.playerClasses.commands.commandWithSubCommands;
+package org.hlebushek.playerClasses.commands.commandsWithSubCommands;
 
 import org.hlebushek.playerClasses.PlayerClasses;
 import org.hlebushek.playerClasses.commands.CommandWithSubCommands;

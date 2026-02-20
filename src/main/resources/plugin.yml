@@ -1,4 +1,4 @@
-name: Player classes
+name: Player_classes
 version: '0.1'
 main: org.hlebushek.playerClasses.PlayerClasses
 api-version: '1.21'

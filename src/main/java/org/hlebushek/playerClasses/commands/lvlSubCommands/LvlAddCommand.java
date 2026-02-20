@@ -5,6 +5,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.hlebushek.playerClasses.PlayerClasses;
 import org.hlebushek.playerClasses.commands.SubCommand;
+import org.hlebushek.playerClasses.dataManage.ConfigManager;
 import org.hlebushek.playerClasses.dataManage.DataManager;
 import org.hlebushek.playerClasses.dataManage.MessagesManager;
 
@@ -14,10 +15,12 @@ import java.util.List;
 public class LvlAddCommand implements SubCommand {
     private final DataManager dataManager;
     private final MessagesManager messages;
+    private final ConfigManager config;
 
     public LvlAddCommand(PlayerClasses plugin) {
         dataManager = plugin.getDataManager();
         messages = plugin.getMessagesManager();
+        config = plugin.getConfigManager();
     }
 
     @Override
@@ -35,6 +38,31 @@ public class LvlAddCommand implements SubCommand {
 
     @Override
     public void execute(CommandSender sender, String[] args) {
-        //TODO
+        if (!sender.hasPermission("playerClasses.admin")) {
+            sender.sendMessage(messages.getMessage("no_permission"));
+            return;
+        }
+        if (args.length != 3) {
+            sender.sendMessage(messages.getMessage("invalid_syntax"));
+            return;
+        }
+
+        Player player = Bukkit.getPlayer(args[1]);
+        if (player == null) {
+            sender.sendMessage(messages.getMessage("player_not_found"));
+            return;
+        }
+
+        try {
+            int currPoints = dataManager.getPoints(player);
+            int points = Integer.parseInt(args[2]) * config.getPointsToUpgrade() + currPoints;
+            dataManager.setPoints(player, points);
+            String defaultMessage = messages.getMessage("lvl_added");
+            String playerName = player.getName();
+            String message = defaultMessage.replace("%player%", playerName).replace("%lvl%", args[2]);
+            sender.sendMessage(message);
+        } catch (NumberFormatException e) {
+            sender.sendMessage(messages.getMessage("NaN"));
+        }
     }
 }

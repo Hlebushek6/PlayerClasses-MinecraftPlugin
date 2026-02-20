@@ -20,8 +20,6 @@ public abstract class CommandWithSubCommands implements CommandExecutor, TabComp
 
     public CommandWithSubCommands(PlayerClasses plugin) {
         messages = plugin.getMessagesManager();
-        register(new ClassShowCommand(plugin));
-        register(new ClassSetCommand(plugin));
     }
 
     protected void register(SubCommand subCommand) {

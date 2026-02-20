@@ -2,7 +2,7 @@ runner:
   speed_level: 1
   fall_damage_multiplier: 0.9
 hobbit:
-  scale: 0.75
+  scale: 0.7
 crafter:
   chance: 0.01
 

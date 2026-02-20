@@ -56,6 +56,8 @@ public class PointsAddCommand implements SubCommand {
             sender.sendMessage(message);
         } catch (NumberFormatException e) {
             sender.sendMessage(messages.getMessage("NaN"));
+        } catch (Exception e) {
+            sender.sendMessage(e.getMessage());
         }
     }
 }

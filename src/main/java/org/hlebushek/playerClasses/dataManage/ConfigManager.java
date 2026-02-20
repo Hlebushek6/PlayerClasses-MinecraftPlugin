@@ -24,12 +24,12 @@ public class ConfigManager {
     }
 
     public HobbitConfig getHobbitConfig() {
-        double scale = config.getInt("hobbit.scale");
+        double scale = config.getDouble("hobbit.scale");
         return new HobbitConfig(scale);
     }
 
     public CrafterConfig getCrafterConfig() {
-        double chance = config.getDouble("crafter.chacne");
+        double chance = config.getDouble("crafter.chance");
         return new CrafterConfig(chance);
     }
 

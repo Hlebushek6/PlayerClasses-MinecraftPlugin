@@ -8,6 +8,7 @@ import org.hlebushek.playerClasses.PlayerClasses;
 import org.hlebushek.playerClasses.model.Classes;
 
 import java.io.File;
+import java.io.IOException;
 
 public class DataManager {
     private final PlayerClasses plugin;
@@ -27,12 +28,21 @@ public class DataManager {
         data = YamlConfiguration.loadConfiguration(dataFile);
     }
 
+    private void save() {
+        try {
+            data.save(dataFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public Classes getClass(Player player) {
-        return Classes.valueOf(data.getString("players." + player.getUniqueId() + ".class", "NONE)"));
+        return Classes.valueOf(data.getString("players." + player.getUniqueId() + ".class", "NONE"));
     }
 
     public void setClass(Player player, Classes playerClass) {
-        data.set("players." + player + ".class", playerClass.toString());
+        data.set("players." + player.getUniqueId() + ".class", playerClass.toString());
+        save();
     }
 
     public int getPoints(Player player) {
@@ -41,8 +51,9 @@ public class DataManager {
 
     public void setPoints(Player player, int points) {
         int explvl = points / configManager.getPointsToUpgrade() + 1;
-        if (explvl != player.getLevel()) player.setLevel(explvl);
-        data.set("players." + player + ".points", points);
+        if (explvl != getLevel(player)) setLevel(player, explvl);
+        data.set("players." + player.getUniqueId() + ".points", points);
+        save();
     }
 
     public int getLevel(Player player) {

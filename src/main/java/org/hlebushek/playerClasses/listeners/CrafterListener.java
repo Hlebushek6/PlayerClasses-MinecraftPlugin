@@ -5,6 +5,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.CraftItemEvent;
+import org.bukkit.inventory.CraftingRecipe;
 import org.bukkit.inventory.ItemStack;
 import org.hlebushek.playerClasses.PlayerClasses;
 import org.hlebushek.playerClasses.dataManage.ConfigManager;
@@ -26,7 +27,8 @@ public class CrafterListener implements Listener {
 
     @EventHandler
     public void onCraft(CraftItemEvent e) {
-        if (!(e.getWhoClicked() instanceof Player player) || dataManager.getClass(player) != Classes.CRAFTER) return;
+        if (!(e.getWhoClicked() instanceof Player player) || dataManager.getClass(player) != Classes.CRAFTER ||
+                !(e.getRecipe() instanceof CraftingRecipe)) return;
         double chance = configManager.getCrafterConfig().chance();
         if (Math.random() > chance) return;
         ItemStack[] inv = e.getInventory().getMatrix();

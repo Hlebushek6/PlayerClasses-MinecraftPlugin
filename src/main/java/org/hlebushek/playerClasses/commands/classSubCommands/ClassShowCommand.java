@@ -40,7 +40,7 @@ public class ClassShowCommand implements SubCommand {
         if (args.length == 1 && sender instanceof Player player) {
             String playerClass = dataManager.getClass(player).toString();
             sender.sendMessage(messagesManager.getMessage("show_class").
-                    replace("%player%", player.getName()).replace("%class%", playerClass));
+                    replace("%player%", player.getName()).replace("%class%", playerClass.toLowerCase()));
         }
         else if (args.length == 2) {
             if (!sender.hasPermission("playerClasses.admin")) {
@@ -53,7 +53,7 @@ public class ClassShowCommand implements SubCommand {
             }
             String playerClass = dataManager.getClass(player).toString();
             sender.sendMessage(messagesManager.getMessage("show_class").
-                    replace("%player%", player.getName()).replace("%class%", playerClass));
+                    replace("%player%", player.getName()).replace("%class%", playerClass.toLowerCase()));
         }
         else {
             sender.sendMessage(messagesManager.getMessage("invalid_syntax"));

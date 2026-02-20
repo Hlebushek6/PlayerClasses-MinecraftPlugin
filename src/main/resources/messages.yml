@@ -13,3 +13,7 @@ show_class: "Класс игрока %player%: %class%"
 show_points: "Счёт игрока %player%: %points%"
 points_set: "Счёт игрока %player% теперь %points%"
 points_added: "Счёт игрока %player% увеличен на %points%"
+
+lvl_added: "Уровень игрока %player% увеличен на %lvl%"
+lvl_set: "Уровень игрока %player% теперь %lvl%"
+show_lvl: "Уровень игрока %player%: %lvl%"

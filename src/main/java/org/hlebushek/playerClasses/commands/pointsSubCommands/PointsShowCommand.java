@@ -22,7 +22,7 @@ public class PointsShowCommand implements SubCommand {
 
     @Override
     public String getName() {
-        return "set";
+        return "show";
     }
 
     @Override

@@ -39,7 +39,7 @@ public class ClassSetCommand implements SubCommand {
                 completions.add(p.getName());
         }
         if (args.length == 3) {
-            completions.addAll(Arrays.stream(Classes.values()).map(Enum::name).toList());
+            completions.addAll(Arrays.stream(Classes.values()).map(e -> e.name().toLowerCase()).toList());
         }
         return completions;
     }
@@ -63,8 +63,9 @@ public class ClassSetCommand implements SubCommand {
             Classes playerClass = Classes.valueOf(args[2].toUpperCase());
             dataManager.setClass(player, playerClass);
             HobbitListener.setSize(player, dataManager, configManager);
+            String playerClassString = playerClass.toString().toLowerCase();
             sender.sendMessage(messagesManager.getMessage("class_set").
-                    replace("%player%", player.getName()).replace("%class%", playerClass.toString()));
+                    replace("%player%", player.getName()).replace("%class%", playerClassString));
         } catch (IllegalArgumentException e) {
             sender.sendMessage(messagesManager.getMessage("class_not_found"));
         }

@@ -35,6 +35,24 @@ public class LvlShowCommand implements SubCommand {
 
     @Override
     public void execute(CommandSender sender, String[] args) {
-        //TODO
+        if (args.length < 1 || args.length > 2 || args.length == 1 && !(sender instanceof Player)) {
+            sender.sendMessage(messages.getMessage("invalid_syntax"));
+            return;
+        }
+        Player player;
+        if (args.length == 1) player = (Player) sender;
+        else if (!sender.hasPermission("playerClasses.admin")) {
+            sender.sendMessage(messages.getMessage("no_permission"));
+            return;
+        }
+        else player = Bukkit.getPlayer(args[1]);
+        if (player == null) {
+            sender.sendMessage(messages.getMessage("player_not_found"));
+            return;
+        }
+        String lvl = Integer.toString(dataManager.getLevel(player));
+        String defaultMessage = messages.getMessage("show_lvl");
+        String message = defaultMessage.replace("%player%", player.getName()).replace("%lvl%", lvl);
+        sender.sendMessage(message);
     }
 }

@@ -24,7 +24,7 @@ public class RunnerListener implements Listener {
     @EventHandler
     public void onMove(PlayerMoveEvent e) {
         Player player = e.getPlayer();
-        if (dataManager.getClass(player) != Classes.RUNNER || player.isSprinting()) return;
+        if (dataManager.getClass(player) != Classes.RUNNER || !player.isSprinting()) return;
         PotionEffect effect;
         int speed_level = configManager.getRunnerConfig().speed_level();
         if (player.hasPotionEffect(PotionEffectType.SPEED)) {
@@ -37,6 +37,7 @@ public class RunnerListener implements Listener {
             effect = new PotionEffect(
                     PotionEffectType.SPEED, 40, speed_level, true, false, false
             );
+        player.addPotionEffect(effect);
     }
 
     @EventHandler

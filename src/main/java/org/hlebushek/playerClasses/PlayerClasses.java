@@ -1,14 +1,15 @@
 package org.hlebushek.playerClasses;
 
 import org.bukkit.plugin.java.JavaPlugin;
-import org.hlebushek.playerClasses.commands.commandWithSubCommands.ClassCommand;
-import org.hlebushek.playerClasses.commands.commandWithSubCommands.LvlCommand;
-import org.hlebushek.playerClasses.commands.commandWithSubCommands.PointsCommand;
+import org.hlebushek.playerClasses.commands.commandsWithSubCommands.ClassCommand;
+import org.hlebushek.playerClasses.commands.commandsWithSubCommands.LvlCommand;
+import org.hlebushek.playerClasses.commands.commandsWithSubCommands.PointsCommand;
 import org.hlebushek.playerClasses.dataManage.DataManager;
 import org.hlebushek.playerClasses.dataManage.MessagesManager;
 import org.hlebushek.playerClasses.dataManage.ConfigManager;
 import org.hlebushek.playerClasses.listeners.CrafterListener;
 import org.hlebushek.playerClasses.listeners.HobbitListener;
+import org.hlebushek.playerClasses.listeners.PointsListener;
 import org.hlebushek.playerClasses.listeners.RunnerListener;
 
 public final class PlayerClasses extends JavaPlugin {
@@ -21,13 +22,14 @@ public final class PlayerClasses extends JavaPlugin {
         // Plugin startup logic
         getLogger().info("Плагин запущен!");
 
-        dataManager = new DataManager(this);
         configManager = new ConfigManager(this);
+        dataManager = new DataManager(this);
         messagesManager = new MessagesManager(this);
 
         getServer().getPluginManager().registerEvents(new RunnerListener(this), this);
         getServer().getPluginManager().registerEvents(new CrafterListener(this), this);
         getServer().getPluginManager().registerEvents(new HobbitListener(this), this);
+        getServer().getPluginManager().registerEvents(new PointsListener(this), this);
 
         getCommand("class").setExecutor(new ClassCommand(this));
         getCommand("points").setExecutor(new PointsCommand(this));
