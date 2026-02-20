@@ -1,7 +1,9 @@
 package org.hlebushek.playerClasses;
 
 import org.bukkit.plugin.java.JavaPlugin;
-import org.hlebushek.playerClasses.commands.ClassCommand;
+import org.hlebushek.playerClasses.commands.commandWithSubCommands.ClassCommand;
+import org.hlebushek.playerClasses.commands.commandWithSubCommands.LvlCommand;
+import org.hlebushek.playerClasses.commands.commandWithSubCommands.PointsCommand;
 import org.hlebushek.playerClasses.dataManage.DataManager;
 import org.hlebushek.playerClasses.dataManage.MessagesManager;
 import org.hlebushek.playerClasses.dataManage.ConfigManager;
@@ -28,6 +30,8 @@ public final class PlayerClasses extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new HobbitListener(this), this);
 
         getCommand("class").setExecutor(new ClassCommand(this));
+        getCommand("points").setExecutor(new PointsCommand(this));
+        getCommand("lvl").setExecutor(new LvlCommand(this));
     }
 
     @Override

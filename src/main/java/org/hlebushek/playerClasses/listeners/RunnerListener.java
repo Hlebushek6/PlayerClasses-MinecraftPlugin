@@ -41,6 +41,10 @@ public class RunnerListener implements Listener {
 
     @EventHandler
     public void onDamage(EntityDamageEvent e) {
-        //TODO
+        if (!(e.getEntity() instanceof Player player)) return;
+        if (dataManager.getClass(player) != Classes.RUNNER || !(e.getCause() == EntityDamageEvent.DamageCause.FALL))
+            return;
+        double fall_damage_multiplier = configManager.getRunnerConfig().fall_damage_multiplier();
+        e.setDamage(e.getDamage() * fall_damage_multiplier);
     }
 }

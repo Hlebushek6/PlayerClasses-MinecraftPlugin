@@ -7,8 +7,21 @@ commands:
   class:
     description: Управление классами
     usage: >
-      /class show [player]
       /class set <player> <class>
+      /class show [player]
+  points:
+    description: Управление счётом игрока
+    usage: >
+      /points <add|set> <player> <points>
+      /points show <player>
+    permission: playerClasses.admin
+    permission-message: У вас нет прав на использование этой команды!
+  lvl:
+    description: Управление уровнем игрока
+    usage: >
+      /lvl add <player> <level>
+      /lvl set <player> <level>
+      /lvl show [player]
 
 permissions:
   playerClasses.admin:

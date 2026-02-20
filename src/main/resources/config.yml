@@ -1,3 +1,9 @@
 runner:
   speed_level: 1
   fall_damage_multiplier: 0.9
+hobbit:
+  scale: 0.75
+crafter:
+  chance: 0.01
+
+points_to_upgrade: 1000

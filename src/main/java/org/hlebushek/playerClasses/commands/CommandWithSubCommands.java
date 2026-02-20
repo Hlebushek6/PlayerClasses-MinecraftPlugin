@@ -14,17 +14,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ClassCommand implements CommandExecutor, TabCompleter {
-    private final MessagesManager messages;
-    private final Map<String, SubCommand> subCommands = new HashMap<>();
+public abstract class CommandWithSubCommands implements CommandExecutor, TabCompleter {
+    protected final MessagesManager messages;
+    protected final Map<String, SubCommand> subCommands = new HashMap<>();
 
-    public ClassCommand(PlayerClasses plugin) {
+    public CommandWithSubCommands(PlayerClasses plugin) {
         messages = plugin.getMessagesManager();
         register(new ClassShowCommand(plugin));
         register(new ClassSetCommand(plugin));
     }
 
-    private void register(SubCommand subCommand) {
+    protected void register(SubCommand subCommand) {
         subCommands.put(subCommand.getName(), subCommand);
     }
 
@@ -57,5 +57,4 @@ public class ClassCommand implements CommandExecutor, TabCompleter {
         }
         return completions;
     }
-
 }

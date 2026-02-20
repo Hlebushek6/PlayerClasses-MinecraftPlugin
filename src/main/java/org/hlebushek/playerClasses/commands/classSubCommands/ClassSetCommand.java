@@ -5,6 +5,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.hlebushek.playerClasses.PlayerClasses;
 import org.hlebushek.playerClasses.commands.SubCommand;
+import org.hlebushek.playerClasses.dataManage.ConfigManager;
+import org.hlebushek.playerClasses.listeners.HobbitListener;
 import org.hlebushek.playerClasses.model.Classes;
 import org.hlebushek.playerClasses.dataManage.DataManager;
 import org.hlebushek.playerClasses.dataManage.MessagesManager;
@@ -16,10 +18,12 @@ import java.util.List;
 public class ClassSetCommand implements SubCommand {
     private final DataManager dataManager;
     private final MessagesManager messagesManager;
+    private final ConfigManager configManager;
 
     public ClassSetCommand(PlayerClasses plugin) {
         dataManager = plugin.getDataManager();
         messagesManager = plugin.getMessagesManager();
+        configManager = plugin.getConfigManager();
     }
 
     @Override
@@ -46,7 +50,7 @@ public class ClassSetCommand implements SubCommand {
             sender.sendMessage(messagesManager.getMessage("no_permission"));
             return;
         }
-        if (args.length < 3) {
+        if (args.length != 3) {
             sender.sendMessage(messagesManager.getMessage("invalid_syntax"));
             return;
         }
@@ -58,6 +62,7 @@ public class ClassSetCommand implements SubCommand {
         try {
             Classes playerClass = Classes.valueOf(args[2].toUpperCase());
             dataManager.setClass(player, playerClass);
+            HobbitListener.setSize(player, dataManager, configManager);
             sender.sendMessage(messagesManager.getMessage("class_set").
                     replace("%player%", player.getName()).replace("%class%", playerClass.toString()));
         } catch (IllegalArgumentException e) {
