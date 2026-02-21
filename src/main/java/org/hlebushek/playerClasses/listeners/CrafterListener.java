@@ -1,11 +1,9 @@
 package org.hlebushek.playerClasses.listeners;
 
-import net.kyori.adventure.text.event.ClickEvent;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.CraftItemEvent;
-import org.bukkit.inventory.CraftingRecipe;
 import org.bukkit.inventory.ItemStack;
 import org.hlebushek.playerClasses.PlayerClasses;
 import org.hlebushek.playerClasses.dataManage.ConfigManager;
