@@ -27,8 +27,7 @@ public class CrafterListener implements Listener {
 
     @EventHandler
     public void onCraft(CraftItemEvent e) {
-        if (!(e.getWhoClicked() instanceof Player player) || dataManager.getClass(player) != Classes.CRAFTER ||
-                !(e.getRecipe() instanceof CraftingRecipe)) return;
+        if (!(e.getWhoClicked() instanceof Player player) || dataManager.getClass(player) != Classes.CRAFTER) return;
         double chance = configManager.getCrafterConfig().chance();
         if (Math.random() > chance) return;
         ItemStack[] inv = e.getInventory().getMatrix();

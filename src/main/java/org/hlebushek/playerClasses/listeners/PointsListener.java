@@ -1,16 +1,14 @@
 package org.hlebushek.playerClasses.listeners;
 
-import org.bukkit.block.data.Ageable;
-import org.bukkit.entity.Enemy;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.BlockBreakEvent;
-import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.inventory.CraftItemEvent;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerAdvancementDoneEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.event.player.PlayerRecipeDiscoverEvent;
 import org.bukkit.inventory.CraftingRecipe;
 import org.hlebushek.playerClasses.PlayerClasses;
 import org.hlebushek.playerClasses.dataManage.DataManager;
@@ -28,6 +26,7 @@ public class PointsListener implements Listener {
         addPoint(e.getPlayer());
     }
 
+    //hobbit & runner
     @EventHandler
     public void onMove(PlayerMoveEvent e) {
         Player player = e.getPlayer();
@@ -37,10 +36,17 @@ public class PointsListener implements Listener {
             addPoint(player);
     }
 
+    //crafter
     @EventHandler
-    public void onCraft(CraftItemEvent e) {
+    public void onAnvilUse(InventoryClickEvent e) {
         if (e.getWhoClicked() instanceof Player player && dataManager.getClass(player) == Classes.CRAFTER &&
-                !(e.getRecipe() instanceof CraftingRecipe)) addPoint(player);
+                e.getInventory().getType() == InventoryType.ANVIL && e.getSlotType() == InventoryType.SlotType.RESULT)
+            addPoint(player);
+    }
+
+    @EventHandler
+    public void onRecipeUnlock(PlayerRecipeDiscoverEvent e) {
+        if (dataManager.getClass(e.getPlayer()) == Classes.CRAFTER) addPoint(e.getPlayer());
     }
 
     private void addPoint(Player player) {

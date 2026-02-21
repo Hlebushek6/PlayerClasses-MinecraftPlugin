@@ -30,6 +30,7 @@ public abstract class CommandWithSubCommands implements CommandExecutor, TabComp
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if(args.length == 0) {
             sender.sendMessage(messages.getMessage("invalid_syntax"));
+            return true;
         }
 
         SubCommand subCommand = subCommands.get(args[0].toLowerCase());
