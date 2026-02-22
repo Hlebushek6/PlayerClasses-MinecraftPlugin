@@ -1,9 +1,28 @@
 runner:
-  speed_level: 1
-  fall_damage_multiplier: 0.9
+  lvl1:
+    speed_level: 1
+    fall_damage_multiplier: 0.9
+  lvl2:
+    speed_level: 2
+    fall_damage_multiplier: 0.75
+  lvl3:
+    speed_level: 3
+    fall_damage_multiplier: 0.5
 hobbit:
-  scale: 0.7
+  scale: 0.66
+  lvl1:
+    food_bonus: 1
+  lvl2:
+    food_bonus: 2
+  lvl3:
+    food_bonus: 4
 crafter:
-  chance: 0.01
+  lvl1:
+    chance: 0.01
+  lvl2:
+    chance: 0.05
+  lvl3:
+    chance: 0.1
 
 points_to_upgrade: 1000
+max_lvl: 3

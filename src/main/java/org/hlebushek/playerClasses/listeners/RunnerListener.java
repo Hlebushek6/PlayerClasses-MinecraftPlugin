@@ -26,7 +26,7 @@ public class RunnerListener implements Listener {
         Player player = e.getPlayer();
         if (dataManager.getClass(player) != Classes.RUNNER || !player.isSprinting()) return;
         PotionEffect effect;
-        int speed_level = configManager.getRunnerConfig().speed_level();
+        int speed_level = configManager.getRunnerConfig(dataManager.getLevel(player)).speed_level();
         if (player.hasPotionEffect(PotionEffectType.SPEED)) {
             PotionEffect currentEffect = player.getPotionEffect(PotionEffectType.SPEED);
             effect = new PotionEffect(PotionEffectType.SPEED, 40, Math.max(
@@ -45,7 +45,8 @@ public class RunnerListener implements Listener {
         if (!(e.getEntity() instanceof Player player)) return;
         if (dataManager.getClass(player) != Classes.RUNNER || !(e.getCause() == EntityDamageEvent.DamageCause.FALL))
             return;
-        double fall_damage_multiplier = configManager.getRunnerConfig().fall_damage_multiplier();
+        int lvl = dataManager.getLevel(player);
+        double fall_damage_multiplier = configManager.getRunnerConfig(lvl).fall_damage_multiplier();
         e.setDamage(e.getDamage() * fall_damage_multiplier);
     }
 }
