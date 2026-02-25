@@ -9,6 +9,7 @@ import org.hlebushek.playerClasses.model.Classes;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.logging.Level;
 
 public class DataManager {
     private final PlayerClasses plugin;
@@ -32,7 +33,7 @@ public class DataManager {
         try {
             data.save(dataFile);
         } catch (IOException e) {
-            e.printStackTrace();
+            plugin.getLogger().log(Level.SEVERE,"Ошибка при сохранении данных!", e);
         }
     }
 
@@ -50,8 +51,8 @@ public class DataManager {
     }
 
     public void setPoints(Player player, int points) {
-        int explvl = points / configManager.getPointsToUpgrade() + 1;
-        if (explvl != getLevel(player)) setLevel(player, explvl);
+        int expLvl = points / configManager.getPointsToUpgrade() + 1;
+        if (expLvl != getLevel(player)) setLevel(player, expLvl);
         data.set("players." + player.getUniqueId() + ".points", points);
         save();
     }

@@ -10,6 +10,7 @@ import org.hlebushek.playerClasses.dataManage.MessagesManager;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class ClassShowCommand implements SubCommand {
     private final DataManager dataManager;
@@ -38,9 +39,10 @@ public class ClassShowCommand implements SubCommand {
     @Override
     public void execute(CommandSender sender, String[] args) {
         if (args.length == 1 && sender instanceof Player player) {
-            String playerClass = dataManager.getClass(player).toString();
-            sender.sendMessage(messagesManager.getMessage("show_class").
-                    replace("%player%", player.getName()).replace("%class%", playerClass.toLowerCase()));
+            String playerClassString = dataManager.getClass(player).toString().toLowerCase();
+            String playerName = player.getName();
+            Map<String, String> placeholders = Map.of("%player%", playerName, "%class%", playerClassString);
+            sender.sendMessage(messagesManager.getMessage("show_class", placeholders));
         }
         else if (args.length == 2) {
             if (!sender.hasPermission("playerClasses.admin")) {
@@ -51,9 +53,10 @@ public class ClassShowCommand implements SubCommand {
                 sender.sendMessage(messagesManager.getMessage("player_not_found"));
                 return;
             }
-            String playerClass = dataManager.getClass(player).toString();
-            sender.sendMessage(messagesManager.getMessage("show_class").
-                    replace("%player%", player.getName()).replace("%class%", playerClass.toLowerCase()));
+            String playerClassString = dataManager.getClass(player).toString().toLowerCase();
+            String playerName = player.getName();
+            Map<String, String> placeholders = Map.of("%player%", playerName, "%class%", playerClassString);
+            sender.sendMessage(messagesManager.getMessage("show_class", placeholders));
         }
         else {
             sender.sendMessage(messagesManager.getMessage("invalid_syntax"));

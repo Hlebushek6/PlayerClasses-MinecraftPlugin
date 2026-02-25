@@ -12,6 +12,7 @@ import org.hlebushek.playerClasses.PlayerClasses;
 import org.hlebushek.playerClasses.dataManage.DataManager;
 import org.hlebushek.playerClasses.model.Classes;
 
+@SuppressWarnings("ClassCanBeRecord")
 public class PointsListener implements Listener {
     private final DataManager dataManager;
 

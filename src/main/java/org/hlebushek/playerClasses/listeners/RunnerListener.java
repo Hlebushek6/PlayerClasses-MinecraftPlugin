@@ -12,6 +12,8 @@ import org.hlebushek.playerClasses.model.Classes;
 import org.hlebushek.playerClasses.dataManage.ConfigManager;
 import org.hlebushek.playerClasses.dataManage.DataManager;
 
+import java.util.Objects;
+
 public class RunnerListener implements Listener {
     private final DataManager dataManager;
     private final ConfigManager configManager;
@@ -30,7 +32,7 @@ public class RunnerListener implements Listener {
         if (player.hasPotionEffect(PotionEffectType.SPEED)) {
             PotionEffect currentEffect = player.getPotionEffect(PotionEffectType.SPEED);
             effect = new PotionEffect(PotionEffectType.SPEED, 40, Math.max(
-                    currentEffect.getAmplifier(), speed_level
+                    Objects.requireNonNull(currentEffect).getAmplifier(), speed_level
             ), currentEffect.isAmbient(), currentEffect.hasParticles(), currentEffect.hasIcon());
         }
         else

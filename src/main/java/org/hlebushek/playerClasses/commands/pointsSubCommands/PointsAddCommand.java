@@ -10,6 +10,7 @@ import org.hlebushek.playerClasses.dataManage.MessagesManager;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class PointsAddCommand implements SubCommand {
     private final DataManager dataManager;
@@ -50,10 +51,9 @@ public class PointsAddCommand implements SubCommand {
             int currPoints = dataManager.getPoints(player);
             int points = Integer.parseInt(args[2]) + currPoints;
             dataManager.setPoints(player, points);
-            String defaultMessage = messages.getMessage("points_added");
             String playerName = player.getName();
-            String message = defaultMessage.replace("%player%", playerName).replace("%points%", args[2]);
-            sender.sendMessage(message);
+            Map<String, String> placeholders = Map.of("%player%", playerName, "%points%", args[2]);
+            sender.sendMessage(messages.getMessage("points_added", placeholders));
         } catch (NumberFormatException e) {
             sender.sendMessage(messages.getMessage("NaN"));
         } catch (Exception e) {

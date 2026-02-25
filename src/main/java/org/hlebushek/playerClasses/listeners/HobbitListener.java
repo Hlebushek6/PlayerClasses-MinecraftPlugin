@@ -11,6 +11,8 @@ import org.hlebushek.playerClasses.dataManage.ConfigManager;
 import org.hlebushek.playerClasses.dataManage.DataManager;
 import org.hlebushek.playerClasses.model.Classes;
 
+import java.util.Objects;
+
 public class HobbitListener implements Listener {
     private final DataManager dataManager;
     private final ConfigManager config;
@@ -37,7 +39,8 @@ public class HobbitListener implements Listener {
 
     public static void setSize(Player player, DataManager dataManager, ConfigManager config) {
         double scale = config.getHobbitConfig(dataManager.getLevel(player)).scale();
-        if (dataManager.getClass(player) == Classes.HOBBIT) player.getAttribute(Attribute.SCALE).setBaseValue(scale);
-        else player.getAttribute(Attribute.SCALE).setBaseValue(1);
+        if (dataManager.getClass(player) == Classes.HOBBIT)
+            Objects.requireNonNull(player.getAttribute(Attribute.SCALE)).setBaseValue(scale);
+        else Objects.requireNonNull(player.getAttribute(Attribute.SCALE)).setBaseValue(1);
     }
 }

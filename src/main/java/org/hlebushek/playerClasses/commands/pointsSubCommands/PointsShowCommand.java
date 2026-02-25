@@ -10,6 +10,7 @@ import org.hlebushek.playerClasses.dataManage.MessagesManager;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class PointsShowCommand implements SubCommand {
     private final DataManager dataManager;
@@ -45,8 +46,8 @@ public class PointsShowCommand implements SubCommand {
             return;
         }
         String points = Integer.toString(dataManager.getPoints(player));
-        String defaultMessage = messages.getMessage("show_points");
-        String message = defaultMessage.replace("%player%", player.getName()).replace("%points%", points);
-        sender.sendMessage(message);
+        String playerName = player.getName();
+        Map<String, String> placeholders = Map.of("%player%", playerName, "%points%", points);
+        sender.sendMessage(messages.getMessage("show_points", placeholders));
     }
 }

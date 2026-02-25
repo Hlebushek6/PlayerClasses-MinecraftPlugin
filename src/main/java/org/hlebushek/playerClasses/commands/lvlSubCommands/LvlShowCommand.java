@@ -10,6 +10,7 @@ import org.hlebushek.playerClasses.dataManage.MessagesManager;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class LvlShowCommand implements SubCommand {
     private final DataManager dataManager;
@@ -51,8 +52,7 @@ public class LvlShowCommand implements SubCommand {
             return;
         }
         String lvl = Integer.toString(dataManager.getLevel(player));
-        String defaultMessage = messages.getMessage("show_lvl");
-        String message = defaultMessage.replace("%player%", player.getName()).replace("%lvl%", lvl);
-        sender.sendMessage(message);
+        Map<String, String> placeholders = Map.of("%player%", player.getName(), "%lvl%", lvl);
+        sender.sendMessage(messages.getMessage("show_lvl", placeholders));
     }
 }

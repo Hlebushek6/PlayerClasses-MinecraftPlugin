@@ -6,6 +6,7 @@ import org.hlebushek.playerClasses.model.CrafterConfig;
 import org.hlebushek.playerClasses.model.HobbitConfig;
 import org.hlebushek.playerClasses.model.RunnerConfig;
 
+@SuppressWarnings("ClassCanBeRecord")
 public class ConfigManager {
     private final FileConfiguration config;
 

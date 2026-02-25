@@ -11,6 +11,7 @@ import org.hlebushek.playerClasses.dataManage.MessagesManager;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class LvlAddCommand implements SubCommand {
     private final DataManager dataManager;
@@ -57,10 +58,10 @@ public class LvlAddCommand implements SubCommand {
             int currPoints = dataManager.getPoints(player);
             int points = Integer.parseInt(args[2]) * config.getPointsToUpgrade() + currPoints;
             dataManager.setPoints(player, points);
-            String defaultMessage = messages.getMessage("lvl_added");
             String playerName = player.getName();
-            String message = defaultMessage.replace("%player%", playerName).replace("%lvl%", args[2]);
-            sender.sendMessage(message);
+            Map<String, String> placeholders = Map.of("%player%", playerName, "%lvl%", args[2]);
+            sender.sendMessage(messages.getMessage("lvl_added", placeholders));
+
         } catch (NumberFormatException e) {
             sender.sendMessage(messages.getMessage("NaN"));
         }

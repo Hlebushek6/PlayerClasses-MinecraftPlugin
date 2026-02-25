@@ -12,6 +12,8 @@ import org.hlebushek.playerClasses.listeners.HobbitListener;
 import org.hlebushek.playerClasses.listeners.PointsListener;
 import org.hlebushek.playerClasses.listeners.RunnerListener;
 
+import java.util.Objects;
+
 public final class PlayerClasses extends JavaPlugin {
     private DataManager dataManager;
     private ConfigManager configManager;
@@ -31,9 +33,9 @@ public final class PlayerClasses extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new HobbitListener(this), this);
         getServer().getPluginManager().registerEvents(new PointsListener(this), this);
 
-        getCommand("class").setExecutor(new ClassCommand(this));
-        getCommand("points").setExecutor(new PointsCommand(this));
-        getCommand("lvl").setExecutor(new LvlCommand(this));
+        Objects.requireNonNull(getCommand("class")).setExecutor(new ClassCommand(this));
+        Objects.requireNonNull(getCommand("points")).setExecutor(new PointsCommand(this));
+        Objects.requireNonNull(getCommand("lvl")).setExecutor(new LvlCommand(this));
     }
 
     @Override
